@@ -215,3 +215,14 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+.page__footer {
+  margin-top: 2rem;
+}
+
+.page__footer-copyright span {
+  display: block;
+  margin-top: 0.5rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  color: #64748b !important;
+}
