@@ -1,0 +1,23 @@
+---
+layout: archive
+---
+
+{% assign category_posts = site.categories[page.category] %}
+
+{% if category_posts.size > 0 %}
+  <h3 class="archive__subtitle" style="display: flex; align-items: center; gap: 0.75rem; margin-top: 0;">
+    <span style="width: 4px; height: 24px; background: linear-gradient(180deg, #2E86DE, #4ECDC4); border-radius: 2px;"></span>
+    {{ page.title }}
+    <span style="font-size: 0.875rem; color: #64748b; font-weight: 400;">（{{ category_posts.size }} 篇）</span>
+  </h3>
+  {% for post in category_posts %}
+    {% include archive-single.html %}
+  {% endfor %}
+{% else %}
+  <div style="text-align: center; padding: 4rem 0;">
+    <div style="font-size: 4rem; margin-bottom: 1rem;">📭</div>
+    <h3 style="color: #1e293b; margin-bottom: 0.5rem;">{{ page.title }}</h3>
+    <p style="color: #64748b; font-size: 1.0625rem; margin-bottom: 0.25rem;">该分类下暂无文章</p>
+    <p style="color: #94a3b8; font-size: 0.9375rem;">文章正在快马加鞭赶来，敬请期待</p>
+  </div>
+{% endif %}

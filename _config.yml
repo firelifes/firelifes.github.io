@@ -21,10 +21,9 @@ plugins:
 search: true
 search_full_content: true
 
-# 分类归档
+# 分类归档（auto-generation 关闭，改为手动管理分类页面）
 jekyll-archives:
-  enabled:
-    - categories
+  enabled: []
   layout: archive
   permalinks:
     category: /category/:name/
@@ -69,6 +68,7 @@ defaults:
       comments: true
       share: true
       related: true
+      permalink: /category/:categories/:year/:month/:day/:title.html
 
 # 底部链接
 footer:
