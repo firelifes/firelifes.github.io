@@ -1,9 +1,10 @@
 title: FIRE生活家
-subtitle: 通往FIRE之路记录
+subtitle: 通往FIRE之路
 name: 向往FIRE的钝刀
 description: 通往FIRE之路记录
 baseurl: ""
 url: "https://firelifes.github.io"
+locale: "zh-CN"
 
 # Minimal Mistakes 主题
 remote_theme: mmistakes/minimal-mistakes

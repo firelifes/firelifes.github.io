@@ -1,0 +1,52 @@
+# 中文界面文本翻译
+# 覆盖 Minimal Mistakes 主题的英文默认文本
+
+# 首页
+home:
+  recent_posts: "最新文章"
+
+# 导航标签
+labels:
+  skip_to_content: "跳转到主要内容"
+  search: "搜索"
+  toc: "目录"
+  menu: "菜单"
+  home: "首页"
+
+# 搜索功能
+search:
+  label: "搜索"
+  text_placeholder: "输入搜索词..."
+  text: "搜索文章内容"
+
+# 文章元信息
+meta:
+  comments_label: "评论"
+  comments: "评论"
+  share: "分享"
+  related_label: "相关文章"
+  min_read: "分钟阅读"
+  read_time: "阅读时间"
+  words: "字"
+  less_than: "少于"
+  published: "发布于"
+  modified: "更新于"
+  date_format: "%Y-%m-%d"
+
+# 分页
+pagination:
+  newer: "上一页"
+  older: "下一页"
+  page: "页"
+  of: "共"
+
+# 按钮
+buttons:
+  read_more: "阅读更多"
+  back_to_top: "回到顶部"
+
+# 页脚
+footer:
+  powered_by: "由"
+  built_with: "技术支持："
+
