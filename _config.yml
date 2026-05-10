@@ -1,0 +1,70 @@
+title: FIRE生活家
+name: 向往FIRE的钝刀
+description: 通往FIRE之路记录
+baseurl: ""
+url: "https://firelifes.github.io"
+
+# Minimal Mistakes 主题
+remote_theme: mmistakes/minimal-mistakes
+markdown: kramdown
+
+# 插件
+plugins:
+  - jekyll-feed
+  - jekyll-archives
+  - jekyll-include-cache
+
+# 站点搜索
+search: true
+search_full_content: true
+
+# 分类归档
+jekyll-archives:
+  enabled:
+    - categories
+  layout: archive
+  permalinks:
+    category: /category/:name/
+
+# 顶部导航栏
+header:
+  title: "FIRE生活家"
+  teaser:
+  links:
+    - title: "分类"
+      url: /categories/
+    - title: "更多"
+      url: /about/
+    - title: "搜索"
+      url: /search/
+
+# 作者信息
+author:
+  name: "向往FIRE的钝刀"
+  avatar: "/assets/images/bio-photo.jpg"
+  bio: "记录通往FIRE之路"
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/firelifes"
+
+# 输出配置
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: true
+      share: true
+      related: true
+
+# 底部链接
+footer:
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/firelifes"
