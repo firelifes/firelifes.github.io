@@ -5,6 +5,7 @@ description: 通往FIRE之路记录
 baseurl: ""
 url: "https://firelifes.github.io"
 locale: "zh-CN"
+timezone: Asia/Shanghai
 
 # Minimal Mistakes 主题
 remote_theme: mmistakes/minimal-mistakes
