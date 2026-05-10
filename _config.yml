@@ -31,12 +31,17 @@ header:
   title: "FIRE生活家"
   teaser:
   links:
-    - title: "分类"
-      url: /categories/
-    - title: "更多"
+    - title: "项目"
+      url: /category/项目/
+    - title: "知识"
+      url: /category/知识/
+    - title: "随笔"
+      url: /category/随笔/
+    - title: "关于"
       url: /about/
-    - title: "搜索"
-      url: /search/
+    - title: "更多"
+      url: /categories/
+      icon: "fas fa-fw fa-bars"
 
 # 作者信息
 author:
