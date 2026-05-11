@@ -493,23 +493,6 @@ layout: default
 
   <!-- 右侧边栏 - 合集相关信息 -->
   <aside class="info-sidebar">
-    <!-- 关注按钮 -->
-    <button class="follow-btn">+ 关注</button>
-    
-    <!-- 作者信息卡片 -->
-    <div class="author-card">
-      <div class="author-header">
-        <div class="author-avatar">🔥</div>
-        <div>
-          <div class="author-name">{{ site.author.name }}</div>
-          <div class="author-stats">12 篇文章 · 1.2k 粉丝</div>
-        </div>
-      </div>
-      <div class="author-bio">
-        {{ site.author.bio }}
-      </div>
-    </div>
-    
     <!-- 所属合集 -->
     {% if page.collection %}
     <div class="collection-card">
@@ -565,34 +548,6 @@ layout: default
       </ul>
     </div>
     {% endif %}
-    
-    <!-- TA的专栏 -->
-    <div class="column-section" style="margin-top: 20px;">
-      <div class="section-title">📝 TA的专栏</div>
-      <div class="column-list">
-        <div class="column-item">
-          <div class="column-icon" style="background: linear-gradient(135deg, #ff6b6b, #ee5a24);">🔥</div>
-          <div class="column-info">
-            <div class="column-name">博客搭建实操</div>
-            <div class="column-count">8 篇文章</div>
-          </div>
-        </div>
-        <div class="column-item">
-          <div class="column-icon" style="background: linear-gradient(135deg, #f093fb, #f5576c);">💰</div>
-          <div class="column-info">
-            <div class="column-name">程序员搞钱指南</div>
-            <div class="column-count">12 篇文章</div>
-          </div>
-        </div>
-        <div class="column-item">
-          <div class="column-icon" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">🏃</div>
-          <div class="column-info">
-            <div class="column-name">自由职业养成</div>
-            <div class="column-count">5 篇文章</div>
-          </div>
-        </div>
-      </div>
-    </div>
   </aside>
 </div>
 
