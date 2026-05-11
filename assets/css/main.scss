@@ -149,6 +149,12 @@ html {
 }
 
 .page__content {
+  p {
+    text-indent: 2em;
+    line-height: 1.8;
+    margin-bottom: 1.2em;
+  }
+  
   a {
     color: #2E86DE;
     border-bottom: 1px solid transparent;
