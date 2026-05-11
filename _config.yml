@@ -44,6 +44,7 @@ header:
       url: /about/
     - title: "更多"
       url: /categories/
+      icon: "☰"
 
 # 作者信息
 author:
