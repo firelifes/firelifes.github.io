@@ -44,7 +44,6 @@ header:
       url: /about/
     - title: "更多"
       url: /categories/
-      icon: "fas fa-fw fa-bars"
 
 # 作者信息
 author:
