@@ -491,63 +491,53 @@ layout: default
     </div>
   </article>
 
-  <!-- 右侧边栏 - 合集相关信息 -->
+  <!-- 右侧边栏 - 合集目录 -->
   <aside class="info-sidebar">
-    <!-- 所属合集 -->
-    {% if page.collection %}
-    <div class="collection-card">
-      <div class="section-title">📚 所属合集</div>
-      <div class="collection-name">{{ page.collection }}</div>
-      <div class="collection-meta">
-        共 8 篇文章 · 当前第 {{ page.episode | default: 1 }} 期
-      </div>
-      <div class="collection-progress">
-        <div class="collection-progress-label">合集进度</div>
-        <div class="collection-progress-bar">
-          <div class="collection-progress-fill" style="width: {{ page.episode | default: 1 | times: 12.5 }}%;"></div>
-        </div>
-      </div>
-    </div>
-    
     <!-- 合集文章列表 -->
     <div class="collection-articles">
-      <div class="section-title">📖 合集目录</div>
-      <ul class="collection-article-list">
-        <li class="collection-article-item">
+      <div class="section-title" style="display: flex; justify-content: space-between; align-items: center;">
+        <span>📖 合集目录</span>
+        <div class="pagination-controls" style="display: flex; gap: 6px;">
+          <button class="page-btn" onclick="prevPage()" id="prevPageBtn" style="padding: 2px 8px; border: 1px solid #ddd; background: white; border-radius: 4px; cursor: pointer; font-size: 12px;">‹</button>
+          <span id="currentPageInfo" style="font-size: 12px; color: #999;">1/2</span>
+          <button class="page-btn" onclick="nextPage()" id="nextPageBtn" style="padding: 2px 8px; border: 1px solid #ddd; background: white; border-radius: 4px; cursor: pointer; font-size: 12px;">›</button>
+        </div>
+      </div>
+      <ul class="collection-article-list" id="collectionList">
+        <li class="collection-article-item" data-page="1">
           <span class="article-number">1</span>
           <span>为什么会有这个博客？</span>
         </li>
-        <li class="collection-article-item">
+        <li class="collection-article-item" data-page="1">
           <span class="article-number">2</span>
           <span>技术选型：GitHub Pages</span>
         </li>
-        <li class="collection-article-item current">
+        <li class="collection-article-item current" data-page="1">
           <span class="article-number">3</span>
           <span>三栏布局文章详情页</span>
         </li>
-        <li class="collection-article-item">
+        <li class="collection-article-item" data-page="1">
           <span class="article-number">4</span>
           <span>分类页面左右布局设计</span>
         </li>
-        <li class="collection-article-item">
+        <li class="collection-article-item" data-page="1">
           <span class="article-number">5</span>
           <span>标签和合辑功能实现</span>
         </li>
-        <li class="collection-article-item">
+        <li class="collection-article-item" data-page="2">
           <span class="article-number">6</span>
-          <span>待更新...</span>
+          <span>SEO优化实战</span>
         </li>
-        <li class="collection-article-item">
+        <li class="collection-article-item" data-page="2">
           <span class="article-number">7</span>
-          <span>待更新...</span>
+          <span>评论系统接入</span>
         </li>
-        <li class="collection-article-item">
+        <li class="collection-article-item" data-page="2">
           <span class="article-number">8</span>
-          <span>待更新...</span>
+          <span>博客性能优化</span>
         </li>
       </ul>
     </div>
-    {% endif %}
   </aside>
 </div>
 
@@ -589,5 +579,64 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
+  
+  // 初始化合集目录翻页
+  initCollectionPagination();
 });
+
+// 合集目录翻页功能
+let currentCollectionPage = 1;
+const ITEMS_PER_PAGE = 5;
+
+function initCollectionPagination() {
+  const items = document.querySelectorAll('#collectionList .collection-article-item');
+  
+  // 找到当前文章的索引，自动跳转到对应页面
+  items.forEach((item, index) => {
+    if (item.classList.contains('current')) {
+      currentCollectionPage = Math.floor(index / ITEMS_PER_PAGE) + 1;
+    }
+  });
+  
+  // 更新显示
+  updateCollectionDisplay();
+}
+
+function updateCollectionDisplay() {
+  const items = document.querySelectorAll('#collectionList .collection-article-item');
+  const totalPages = Math.ceil(items.length / ITEMS_PER_PAGE);
+  
+  items.forEach((item, index) => {
+    const itemPage = Math.floor(index / ITEMS_PER_PAGE) + 1;
+    if (itemPage === currentCollectionPage) {
+      item.style.display = 'flex';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+  
+  // 更新按钮状态
+  document.getElementById('prevPageBtn').disabled = currentCollectionPage === 1;
+  document.getElementById('nextPageBtn').disabled = currentCollectionPage === totalPages;
+  
+  // 更新页码信息
+  document.getElementById('currentPageInfo').textContent = `${currentCollectionPage}/${totalPages}`;
+}
+
+function prevPage() {
+  if (currentCollectionPage > 1) {
+    currentCollectionPage--;
+    updateCollectionDisplay();
+  }
+}
+
+function nextPage() {
+  const items = document.querySelectorAll('#collectionList .collection-article-item');
+  const totalPages = Math.ceil(items.length / ITEMS_PER_PAGE);
+  
+  if (currentCollectionPage < totalPages) {
+    currentCollectionPage++;
+    updateCollectionDisplay();
+  }
+}
 </script>
