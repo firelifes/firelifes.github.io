@@ -7,189 +7,25 @@ $masthead-link-color-hover: #1B6FB1;
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
 @import "minimal-mistakes";
 
-/* ==================== 导航栏强制显示 ==================== */
+/* 最简单的样式：只固定导航栏和设置背景色 */
 .masthead {
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  z-index: 999999 !important;
-  width: 100% !important;
-  background: #dbeafe !important;
-  border-bottom: 2px solid #2E86DE !important;
-  box-shadow: 0 2px 12px rgba(46, 134, 222, 0.15) !important;
-  display: block !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2000;
+  width: 100%;
+  background: #dbeafe;
+  border-bottom: 2px solid #2E86DE;
 }
 
-.masthead__inner-wrap {
-  padding: 1rem !important;
-  max-width: 1280px !important;
-  margin: 0 auto !important;
-  background: transparent !important;
-}
-
-.masthead__menu {
-  width: 100% !important;
-  background: transparent !important;
-}
-
-.greedy-nav {
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  background: transparent !important;
-}
-
-.greedy-nav a {
-  color: #1e293b !important;
-  font-weight: 500 !important;
-}
-
-.greedy-nav a:hover {
-  color: #2E86DE !important;
-}
-
-.greedy-nav .site-logo {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 0.1rem !important;
-  line-height: 1.3 !important;
-  flex-shrink: 0 !important;
-  text-decoration: none !important;
-  background: transparent !important;
-}
-
-.greedy-nav .site-logo__title {
-  font-size: 1.25rem !important;
-  font-weight: 700 !important;
-  color: #1B6FB1 !important;
-  text-shadow: 0 2px 4px rgba(46, 134, 222, 0.25), 0 1px 2px rgba(255, 255, 255, 0.6) !important;
-}
-
-.greedy-nav .site-logo__subtitle {
-  font-size: 0.7rem !important;
-  color: rgba(100, 116, 139, 0.9) !important;
-}
-
-/* ==================== 内容间距 ==================== */
+/* 给 body 留空间，避免被导航栏遮挡 */
 body {
-  padding-top: 80px !important;
+  padding-top: 70px;
 }
 
-html {
-  scroll-padding-top: 80px !important;
-}
-
-/* ==================== 防止 transform 覆盖定位 ==================== */
-.wrapper,
-.page__wrapper,
-.page,
-.page__inner-wrap,
-.page__hero--overlay,
-.initial-content,
-.page__content,
-.archive,
-.sidebar {
-  transform: none !important;
-  -webkit-transform: none !important;
-  -moz-transform: none !important;
-}
-
-/* ==================== 段落首行缩进 ==================== */
-.page__content p,
-.archive__item-excerpt p,
-.archive__item-content p,
-.page p {
-  text-indent: 2em !important;
-  line-height: 1.8 !important;
-  margin-bottom: 1.2em !important;
-}
-
-/* ==================== 响应式 ==================== */
-@media (max-width: 64em) {
-  body {
-    padding-top: 100px !important;
-  }
-
-  html {
-    scroll-padding-top: 100px !important;
-  }
-
-  .greedy-nav {
-    flex-wrap: wrap !important;
-  }
-
-  .site-logo {
-    width: 100% !important;
-    align-items: center !important;
-    text-align: center !important;
-  }
-
-  .visible-links {
-    justify-content: center !important;
-    width: 100% !important;
-  }
-}
-
-/* ==================== 其他样式保持 ==================== */
-.archive__item-title a {
-  color: #1e293b !important;
-}
-
-.archive__item-title a:hover {
-  color: #2E86DE !important;
-}
-
-.btn {
-  background: linear-gradient(135deg, #2E86DE 0%, #1B6FB1 100%) !important;
-  border-radius: 8px !important;
-  border: none !important;
-  box-shadow: 0 4px 12px rgba(46, 134, 222, 0.3) !important;
-  transition: all 0.3s ease !important;
-}
-
-.btn:hover {
-  transform: translateY(-2px) !important;
-  box-shadow: 0 6px 20px rgba(46, 134, 222, 0.4) !important;
-}
-
-.page__content a {
-  color: #2E86DE !important;
-  border-bottom: 1px solid transparent !important;
-}
-
-.page__content a:hover {
-  color: #1B6FB1 !important;
-  border-bottom-color: #2E86DE !important;
-}
-
-.page__footer {
-  background: #1e293b !important;
-  color: #94a3b8 !important;
-}
-
-.page__footer a {
-  color: #cbd5e1 !important;
-}
-
-.page__footer a:hover {
-  color: #4ECDC4 !important;
-}
-
-.taxonomy__section .archive__item {
-  padding: 1rem !important;
-  border-radius: 12px !important;
-  transition: all 0.3s ease !important;
-}
-
-.taxonomy__section .archive__item:hover {
-  background: #f0f7ff !important;
-  transform: translateX(4px) !important;
-}
-
-.page__footer-copyright span {
-  display: block !important;
-  margin-top: 0.5rem !important;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
-  color: #64748b !important;
+/* 段落首行缩进 */
+.page__content p {
+  text-indent: 2em;
+  line-height: 1.8;
 }
