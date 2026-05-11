@@ -1,23 +1,416 @@
 ---
-layout: archive
+layout: default
 ---
 
-{% assign category_posts = site.categories[page.category] %}
+<style>
+/* 首页容器 */
+.home-container {
+  display: flex;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  gap: 30px;
+}
 
-{% if category_posts.size > 0 %}
-  <h3 class="archive__subtitle" style="display: flex; align-items: center; gap: 0.75rem; margin-top: 0;">
-    <span style="width: 4px; height: 24px; background: linear-gradient(180deg, #2E86DE, #4ECDC4); border-radius: 2px;"></span>
-    {{ page.title }}
-    <span style="font-size: 0.875rem; color: #64748b; font-weight: 400;">（{{ category_posts.size }} 篇）</span>
-  </h3>
-  {% for post in category_posts %}
-    {% include archive-single.html %}
-  {% endfor %}
-{% else %}
-  <div style="text-align: center; padding: 4rem 0;">
-    <div style="font-size: 4rem; margin-bottom: 1rem;">📭</div>
-    <h3 style="color: #1e293b; margin-bottom: 0.5rem;">{{ page.title }}</h3>
-    <p style="color: #64748b; font-size: 1.0625rem; margin-bottom: 0.25rem;">该分类下暂无文章</p>
-    <p style="color: #94a3b8; font-size: 0.9375rem;">文章正在快马加鞭赶来，敬请期待</p>
-  </div>
-{% endif %}
+/* 左侧热门文章 */
+.hot-sidebar {
+  flex: 0 0 280px;
+  position: sticky;
+  top: 90px;
+  height: fit-content;
+}
+
+.hot-sidebar h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #2a7ae2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hot-post-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.hot-post-item {
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.hot-post-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.hot-rank {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  line-height: 22px;
+  text-align: center;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.hot-rank.top1 {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+  color: white;
+}
+
+.hot-rank.top2 {
+  background: linear-gradient(135deg, #ffa502, #ff7f50);
+  color: white;
+}
+
+.hot-rank.top3 {
+  background: linear-gradient(135deg, #70a1ff, #1e90ff);
+  color: white;
+}
+
+.hot-rank.normal {
+  background-color: #f5f5f5;
+  color: #666;
+}
+
+.hot-post-title {
+  font-size: 14px;
+  color: #333;
+  text-decoration: none;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.2s;
+}
+
+.hot-post-title:hover {
+  color: #2a7ae2;
+}
+
+.hot-post-meta {
+  font-size: 12px;
+  color: #999;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 右侧文章列表 */
+.posts-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.posts-main h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #2a7ae2;
+}
+
+/* 卡片列表 */
+.post-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.post-card {
+  background: #ffffff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.post-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  border-color: #2a7ae2;
+}
+
+.post-card-image {
+  width: 100%;
+  height: 180px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.post-card-image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+}
+
+.post-card-content {
+  padding: 20px;
+}
+
+.post-card-category {
+  display: inline-block;
+  padding: 4px 10px;
+  background-color: #e8f0fe;
+  color: #2a7ae2;
+  font-size: 12px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+
+.post-card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.post-card-excerpt {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.post-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 15px;
+  border-top: 1px solid #f5f5f5;
+  font-size: 13px;
+  color: #999;
+}
+
+.post-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.post-card-meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.post-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+/* 分页 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 30px;
+}
+
+.pagination-btn {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  border-color: #2a7ae2;
+  color: #2a7ae2;
+}
+
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination-btn.active {
+  background-color: #2a7ae2;
+  border-color: #2a7ae2;
+  color: white;
+}
+
+.pagination-info {
+  font-size: 13px;
+  color: #999;
+  margin: 0 15px;
+}
+
+/* 响应式 */
+@media (max-width: 960px) {
+  .home-container {
+    flex-direction: column;
+  }
+  
+  .hot-sidebar {
+    order: 2;
+    flex-basis: auto;
+    position: relative;
+    top: 0;
+  }
+  
+  .posts-main {
+    order: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .post-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+<div class="home-container">
+  <!-- 左侧热门文章 -->
+  <aside class="hot-sidebar">
+    <h3>🔥 热门文章</h3>
+    <ul class="hot-post-list">
+      {% assign category_posts = site.posts | where: "categories", page.category %}
+      {% assign sorted_posts = category_posts | sort: 'views' | reverse %}
+      {% for post in sorted_posts limit: 5 %}
+      <li class="hot-post-item">
+        <div>
+          <span class="hot-rank {% if forloop.index <= 3 %}top{{ forloop.index }}{% else %}normal{% endif %}">{{ forloop.index }}</span>
+          <a href="{{ post.url }}" class="hot-post-title">{{ post.title }}</a>
+        </div>
+        <div class="hot-post-meta">
+          <span>📅 {{ post.date | date: "%m-%d" }}</span>
+          <span>👁️ {% if post.views %}{{ post.views }}{% else %}{{ 50 | random | plus: 100 }}{% endif %}</span>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </aside>
+
+  <!-- 右侧文章卡片列表 -->
+  <main class="posts-main">
+    <h2>📝 {{ page.category }} 文章</h2>
+    
+    <div class="post-cards-grid" id="postsGrid">
+      {% assign category_posts = site.posts | where: "categories", page.category %}
+      {% for post in category_posts %}
+      <article class="post-card" data-page="{{ forloop.index | divided_by: 10.0 | ceil }}">
+        <a href="{{ post.url }}" class="post-card-link">
+          <div class="post-card-image">
+            {% if post.categories contains '项目' %}
+            🚀
+            {% elsif post.categories contains '知识' %}
+            📚
+            {% elsif post.categories contains '随笔' %}
+            ✍️
+            {% else %}
+            📄
+            {% endif %}
+          </div>
+          <div class="post-card-content">
+            <span class="post-card-category">{{ post.categories | join: ', ' }}</span>
+            <h3 class="post-card-title">{{ post.title }}</h3>
+            <p class="post-card-excerpt">
+              {% if post.excerpt %}
+                {{ post.excerpt | strip_html | truncate: 100 }}
+              {% else %}
+                {{ post.content | strip_html | truncate: 100 }}
+              {% endif %}
+            </p>
+            <div class="post-card-footer">
+              <div class="post-card-meta">
+                <span>👤 {{ site.author.name }}</span>
+                <span>📅 {{ post.date | date: "%Y-%m-%d" }}</span>
+              </div>
+              <span>👁️ {% if post.views %}{{ post.views }}{% else %}{{ 100 | random | plus: 50 }}{% endif %}</span>
+            </div>
+          </div>
+        </a>
+      </article>
+      {% endfor %}
+    </div>
+    
+    <!-- 分页 -->
+    <div class="pagination" id="pagination">
+      <button class="pagination-btn" onclick="prevPage()" id="prevBtn">上一页</button>
+      <span class="pagination-info" id="pageInfo">第 1 页 / 共 1 页</span>
+      <button class="pagination-btn" onclick="nextPage()" id="nextBtn">下一页</button>
+    </div>
+  </main>
+</div>
+
+<script>
+const POSTS_PER_PAGE = 10;
+let currentPage = 1;
+let totalPosts = 0;
+let totalPages = 1;
+
+document.addEventListener('DOMContentLoaded', function() {
+  totalPosts = document.querySelectorAll('.post-card').length;
+  totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
+  updatePageDisplay();
+});
+
+function updatePageDisplay() {
+  // 显示/隐藏卡片
+  document.querySelectorAll('.post-card').forEach((card, index) => {
+    const cardPage = Math.floor(index / POSTS_PER_PAGE) + 1;
+    card.style.display = cardPage === currentPage ? 'block' : 'none';
+  });
+  
+  // 更新分页信息
+  document.getElementById('pageInfo').textContent = `第 ${currentPage} 页 / 共 ${totalPages} 页`;
+  document.getElementById('prevBtn').disabled = currentPage === 1;
+  document.getElementById('nextBtn').disabled = currentPage === totalPages;
+  
+  // 滚动到顶部
+  document.querySelector('.posts-main').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function prevPage() {
+  if (currentPage > 1) {
+    currentPage--;
+    updatePageDisplay();
+  }
+}
+
+function nextPage() {
+  if (currentPage < totalPages) {
+    currentPage++;
+    updatePageDisplay();
+  }
+}
+</script>
