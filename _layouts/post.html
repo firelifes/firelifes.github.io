@@ -580,7 +580,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
-  // 初始化合集目录翻页
+  // 初始化合集目录翻页和选中状态
   initCollectionPagination();
 });
 
@@ -590,9 +590,26 @@ const ITEMS_PER_PAGE = 5;
 
 function initCollectionPagination() {
   const items = document.querySelectorAll('#collectionList .collection-article-item');
+  const currentUrl = window.location.href;
   
-  // 找到当前文章的索引，自动跳转到对应页面
+  // 根据当前URL找到对应的文章并设置current
   items.forEach((item, index) => {
+    const onclickAttr = item.getAttribute('onclick');
+    if (onclickAttr) {
+      // 提取链接
+      const match = onclickAttr.match(/'([^']+)'/);
+      if (match) {
+        const itemUrl = match[1];
+        // 检查当前URL是否包含该链接
+        if (currentUrl.includes(itemUrl.replace('.html', ''))) {
+          item.classList.add('current');
+        } else {
+          item.classList.remove('current');
+        }
+      }
+    }
+    
+    // 找到当前文章的索引，自动跳转到对应页面
     if (item.classList.contains('current')) {
       currentCollectionPage = Math.floor(index / ITEMS_PER_PAGE) + 1;
     }

@@ -249,6 +249,20 @@
   </footer>
 
   <script>
+    // 页面加载完成后设置导航选中状态
+    document.addEventListener('DOMContentLoaded', function() {
+      const currentUrl = window.location.href;
+      const navLinks = document.querySelectorAll('.nav-link');
+      
+      navLinks.forEach(link => {
+        const linkUrl = link.getAttribute('href');
+        // 检查当前URL是否包含导航链接（去掉.html后缀比较）
+        if (currentUrl.includes(linkUrl.replace('.html', ''))) {
+          link.classList.add('active');
+        }
+      });
+    });
+    
     // 搜索功能
     function toggleSearch() {
       const overlay = document.getElementById('searchOverlay');
