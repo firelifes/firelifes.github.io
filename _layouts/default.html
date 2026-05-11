@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="{{ site.locale | default: 'zh-CN' }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  
+  <style>
+    /* 全局重置 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #ffffff;
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    /* 顶部导航栏 */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: #ffffff;
+      border-bottom: 1px solid #e5e5e5;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    
+    .header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .site-logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1a1a1a;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .site-logo:hover {
+      color: #2a7ae2;
+    }
+    
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .nav-link {
+      padding: 8px 16px;
+      color: #666;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    
+    .nav-link:hover {
+      background-color: #f5f5f5;
+      color: #2a7ae2;
+    }
+    
+    .nav-link.active {
+      background-color: #e8f0fe;
+      color: #2a7ae2;
+    }
+    
+    .nav-search-btn {
+      padding: 8px 12px;
+      color: #666;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.2s;
+      font-size: 16px;
+    }
+    
+    .nav-search-btn:hover {
+      background-color: #f5f5f5;
+      color: #2a7ae2;
+    }
+    
+    /* 搜索弹窗 */
+    .search-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 2000;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 100px;
+    }
+    
+    .search-overlay.active {
+      display: flex;
+    }
+    
+    .search-box {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+    
+    .search-input {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 16px;
+      border: 2px solid #e5e5e5;
+      border-radius: 8px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    
+    .search-input:focus {
+      border-color: #2a7ae2;
+    }
+    
+    .search-close {
+      text-align: right;
+      margin-bottom: 16px;
+    }
+    
+    .search-close-btn {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #999;
+    }
+    
+    .search-close-btn:hover {
+      color: #333;
+    }
+    
+    /* 主要内容区 */
+    .site-main {
+      min-height: calc(100vh - 64px - 60px);
+    }
+    
+    /* 页脚 */
+    .site-footer {
+      background-color: #fafafa;
+      border-top: 1px solid #e5e5e5;
+      padding: 20px 0;
+    }
+    
+    .footer-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+      text-align: center;
+      font-size: 13px;
+      color: #999;
+    }
+    
+    .footer-links {
+      margin-bottom: 10px;
+    }
+    
+    .footer-links a {
+      color: #666;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    
+    .footer-links a:hover {
+      color: #2a7ae2;
+    }
+    
+    /* 响应式导航 */
+    @media (max-width: 768px) {
+      .nav-link {
+        padding: 8px 10px;
+        font-size: 13px;
+      }
+      
+      .header-inner {
+        padding: 0 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 顶部导航栏 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="{{ '/' | relative_url }}" class="site-logo">
+        🔥 {{ site.title }}
+      </a>
+      <nav class="site-nav">
+        {% for link in site.header.links %}
+        <a href="{{ link.url | relative_url }}" class="nav-link{% if page.url == link.url %} active{% endif %}">
+          {% if link.icon %}<span style="margin-right: 4px;">{{ link.icon }}</span>{% endif %}
+          {{ link.title }}
+        </a>
+        {% endfor %}
+        <div class="nav-search-btn" onclick="toggleSearch()">🔍</div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 搜索弹窗 -->
+  <div class="search-overlay" id="searchOverlay" onclick="if(event.target === this) toggleSearch()">
+    <div class="search-box">
+      <div class="search-close">
+        <button class="search-close-btn" onclick="toggleSearch()">×</button>
+      </div>
+      <input type="text" class="search-input" placeholder="搜索文章..." id="searchInput" oninput="handleSearch(this.value)">
+    </div>
+  </div>
+
+  <!-- 主要内容 -->
+  <main class="site-main">
+    {{ content }}
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-links">
+        {% for link in site.footer.links %}
+        <a href="{{ link.url }}" target="_blank">{{ link.label }}</a>
+        {% endfor %}
+      </div>
+      <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // 搜索功能
+    function toggleSearch() {
+      const overlay = document.getElementById('searchOverlay');
+      overlay.classList.toggle('active');
+      if (overlay.classList.contains('active')) {
+        document.getElementById('searchInput').focus();
+      }
+    }
+    
+    // ESC 关闭搜索
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        const overlay = document.getElementById('searchOverlay');
+        if (overlay.classList.contains('active')) {
+          toggleSearch();
+        }
+      }
+      // Ctrl/Cmd + K 打开搜索
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        toggleSearch();
+      }
+    });
+    
+    function handleSearch(query) {
+      // 搜索功能可以后续扩展
+      console.log('Searching:', query);
+    }
+  </script>
+</body>
+</html>
