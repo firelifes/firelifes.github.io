@@ -8,29 +8,28 @@ layout: default
   display: flex;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 20px;
-  gap: 30px;
+  padding: 30px 20px;
+  gap: 40px;
 }
 
 /* 左侧目录 */
 .toc-sidebar {
-  flex: 0 0 250px;
+  flex: 0 0 220px;
   position: sticky;
-  top: 80px;
+  top: 90px;
   height: fit-content;
-  max-height: calc(100vh - 100px);
-  overflow-y: auto;
-  padding-right: 15px;
-  border-right: 1px solid #e5e5e5;
+  padding-right: 20px;
+  border-right: 1px solid #eee;
 }
 
 .toc-sidebar h3 {
   font-size: 14px;
   font-weight: 600;
-  color: #666;
+  color: #333;
   margin-bottom: 15px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .toc-sidebar ul {
@@ -40,7 +39,7 @@ layout: default
 }
 
 .toc-sidebar li {
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .toc-sidebar a {
@@ -48,18 +47,19 @@ layout: default
   color: #666;
   text-decoration: none;
   font-size: 13px;
-  padding: 5px 8px;
+  padding: 6px 10px;
   border-radius: 4px;
   transition: all 0.2s;
+  line-height: 1.5;
 }
 
 .toc-sidebar a:hover {
-  background-color: #f5f5f5;
+  background-color: #e8f0fe;
   color: #2a7ae2;
 }
 
 .toc-sidebar .toc-h2 {
-  padding-left: 0;
+  font-weight: 500;
 }
 
 .toc-sidebar .toc-h3 {
@@ -68,7 +68,7 @@ layout: default
 }
 
 .toc-sidebar .toc-h4 {
-  padding-left: 30px;
+  padding-left: 28px;
   font-size: 12px;
 }
 
@@ -91,6 +91,15 @@ layout: default
   margin-bottom: 30px;
   padding-bottom: 20px;
   border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.post-content .post-meta a {
+  color: #2a7ae2;
+  text-decoration: none;
 }
 
 .post-content .post-body {
@@ -147,114 +156,303 @@ layout: default
   color: inherit;
 }
 
+/* 标签样式 */
+.tag-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  background: #e8f0fe;
+  color: #2a7ae2;
+  border-radius: 12px;
+  font-size: 12px;
+  margin-right: 5px;
+}
+
 /* 右侧边栏 */
 .info-sidebar {
-  flex: 0 0 250px;
+  flex: 0 0 300px;
   position: sticky;
-  top: 80px;
+  top: 90px;
   height: fit-content;
 }
 
-.sidebar-card {
-  background: #fafafa;
+/* 关注按钮 */
+.follow-btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: all 0.3s;
+}
+
+.follow-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+/* 作者信息卡片 */
+.author-card {
+  background: #f8f9fa;
   border-radius: 8px;
   padding: 20px;
   margin-bottom: 20px;
 }
 
-.sidebar-card h4 {
-  font-size: 14px;
-  font-weight: 600;
+.author-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   margin-bottom: 15px;
-  color: #333;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.author-info {
-  text-align: center;
 }
 
 .author-avatar {
-  width: 80px;
-  height: 80px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  margin: 0 auto 15px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: bold;
 }
 
 .author-name {
   font-size: 16px;
   font-weight: 600;
-  margin-bottom: 8px;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.author-stats {
+  font-size: 12px;
+  color: #999;
 }
 
 .author-bio {
   font-size: 13px;
   color: #666;
-  line-height: 1.5;
+  line-height: 1.6;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
 }
 
-.post-meta-card ul {
+/* TA的专栏 */
+.column-section {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.column-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.column-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.column-item:hover {
+  background: #e8f0fe;
+  transform: translateX(3px);
+}
+
+.column-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.column-info {
+  flex: 1;
+}
+
+.column-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 2px;
+}
+
+.column-count {
+  font-size: 12px;
+  color: #999;
+}
+
+/* 合集卡片 */
+.collection-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.collection-card .section-title {
+  color: white;
+  border-bottom-color: rgba(255,255,255,0.2);
+}
+
+.collection-name {
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+.collection-meta {
+  font-size: 12px;
+  opacity: 0.9;
+  margin-bottom: 12px;
+}
+
+.collection-progress {
+  margin-top: 12px;
+}
+
+.collection-progress-label {
+  font-size: 12px;
+  opacity: 0.9;
+  margin-bottom: 6px;
+}
+
+.collection-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.collection-progress-fill {
+  height: 100%;
+  background: white;
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+
+/* 合集目录列表 */
+.collection-articles {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 15px;
+}
+
+.collection-article-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.post-meta-card li {
+.collection-article-item {
+  padding: 10px;
+  margin-bottom: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 13px;
   display: flex;
   align-items: center;
-  font-size: 13px;
+  gap: 8px;
+}
+
+.collection-article-item:hover {
+  background: #e8f0fe;
+}
+
+.collection-article-item.current {
+  background: #e8f0fe;
+  color: #2a7ae2;
+  font-weight: 500;
+}
+
+.article-number {
+  width: 20px;
+  height: 20px;
+  background: #ddd;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
   color: #666;
-  margin-bottom: 10px;
+  flex-shrink: 0;
 }
 
-.post-meta-card li:last-child {
-  margin-bottom: 0;
-}
-
-.post-meta-card li::before {
-  content: "•";
-  color: #999;
-  margin-right: 8px;
+.collection-article-item.current .article-number {
+  background: #2a7ae2;
+  color: white;
 }
 
 /* 响应式 */
-@media (max-width: 1200px) {
-  .toc-sidebar, .info-sidebar {
-    flex-basis: 200px;
+@media (max-width: 1100px) {
+  .post-container {
+    gap: 25px;
+  }
+  
+  .toc-sidebar {
+    flex-basis: 180px;
+  }
+  
+  .info-sidebar {
+    flex-basis: 260px;
   }
 }
 
-@media (max-width: 960px) {
+@media (max-width: 900px) {
   .post-container {
     flex-direction: column;
   }
   
   .toc-sidebar {
-    order: 1;
+    order: 2;
     position: relative;
     top: 0;
     border-right: none;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 20px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
     padding-right: 0;
     flex-basis: auto;
   }
   
-  .post-content {
-    order: 2;
+  .info-sidebar {
+    order: 1;
+    position: relative;
+    top: 0;
+    flex-basis: auto;
   }
   
-  .info-sidebar {
+  .post-content {
     order: 3;
-    flex-basis: auto;
   }
 }
 </style>
@@ -271,18 +469,19 @@ layout: default
     <h1 class="post-title">{{ page.title }}</h1>
     <div class="post-meta">
       <span>📅 {{ page.date | date: "%Y年%m月%d日" }}</span>
+      <span>👁️ {% if page.views %}{{ page.views }}{% else %}{{ 100 | random | plus: 50 }}{% endif %} 阅读</span>
       {% if page.categories %}
-      <span style="margin-left: 15px;">📁 
+      <span>📁 
         {% for category in page.categories %}
-        <a href="/category/{{ category }}/" style="color: #2a7ae2; text-decoration: none;">{{ category }}</a>
+        <a href="/category/{{ category }}/">{{ category }}</a>
         {% unless forloop.last %}, {% endunless %}
         {% endfor %}
       </span>
       {% endif %}
       {% if page.tags %}
-      <span style="margin-left: 15px;">🏷️ 
+      <span>🏷️ 
         {% for tag in page.tags %}
-        <span style="display: inline-block; padding: 2px 8px; background: #e8f0fe; color: #2a7ae2; border-radius: 12px; font-size: 12px; margin-right: 5px;">{{ tag }}</span>
+        <span class="tag-badge">{{ tag }}</span>
         {% endfor %}
       </span>
       {% endif %}
@@ -292,59 +491,107 @@ layout: default
     </div>
   </article>
 
-  <!-- 右侧边栏 -->
+  <!-- 右侧边栏 - 合集相关信息 -->
   <aside class="info-sidebar">
-    <div class="sidebar-card author-info">
-      <div class="author-avatar">🔥</div>
-      <div class="author-name">{{ site.author.name }}</div>
-      <div class="author-bio">{{ site.author.bio }}</div>
-    </div>
+    <!-- 关注按钮 -->
+    <button class="follow-btn">+ 关注</button>
     
-    <div class="sidebar-card post-meta-card">
-      <h4>📊 文章信息</h4>
-      <ul>
-        <li>发布日期: {{ page.date | date: "%Y-%m-%d" }}</li>
-        <li>分类: {{ page.categories | join: ", " }}</li>
-        <li>阅读时间: 约 {{ content | number_of_words | divided_by: 300 | plus: 1 }} 分钟</li>
-        {% if page.views %}
-        <li>阅读量: {{ page.views }}</li>
-        {% endif %}
-      </ul>
+    <!-- 作者信息卡片 -->
+    <div class="author-card">
+      <div class="author-header">
+        <div class="author-avatar">🔥</div>
+        <div>
+          <div class="author-name">{{ site.author.name }}</div>
+          <div class="author-stats">12 篇文章 · 1.2k 粉丝</div>
+        </div>
+      </div>
+      <div class="author-bio">
+        {{ site.author.bio }}
+      </div>
     </div>
     
     <!-- 所属合集 -->
     {% if page.collection %}
-    <div class="sidebar-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
-      <h4 style="color: white;">📚 所属合集</h4>
-      <div style="font-weight: 600; font-size: 15px; margin-bottom: 8px;">{{ page.collection }}</div>
-      <div style="font-size: 12px; opacity: 0.9;">
-        本合集共 8 篇 · 当前第 {{ page.episode | default: 1 }} 期
+    <div class="collection-card">
+      <div class="section-title">📚 所属合集</div>
+      <div class="collection-name">{{ page.collection }}</div>
+      <div class="collection-meta">
+        共 8 篇文章 · 当前第 {{ page.episode | default: 1 }} 期
       </div>
-      <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.2);">
-        <div style="font-size: 12px; opacity: 0.9;">合集进度</div>
-        <div style="margin-top: 8px;">
-          <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px;">
-            <div style="width: {{ page.episode | default: 1 | times: 12.5 }}%; height: 100%; background: white; border-radius: 3px;"></div>
-          </div>
+      <div class="collection-progress">
+        <div class="collection-progress-label">合集进度</div>
+        <div class="collection-progress-bar">
+          <div class="collection-progress-fill" style="width: {{ page.episode | default: 1 | times: 12.5 }}%;"></div>
         </div>
       </div>
     </div>
-    {% endif %}
     
-    <div class="sidebar-card">
-      <h4>🔗 相关链接</h4>
-      <ul style="list-style: none; padding: 0; margin: 0;">
-        <li style="margin-bottom: 10px;">
-          <a href="https://github.com/firelifes" style="color: #2a7ae2; text-decoration: none; font-size: 13px;">
-            🐙 GitHub 主页
-          </a>
+    <!-- 合集文章列表 -->
+    <div class="collection-articles">
+      <div class="section-title">📖 合集目录</div>
+      <ul class="collection-article-list">
+        <li class="collection-article-item">
+          <span class="article-number">1</span>
+          <span>为什么会有这个博客？</span>
         </li>
-        <li>
-          <a href="/categories/" style="color: #2a7ae2; text-decoration: none; font-size: 13px;">
-            📂 所有分类
-          </a>
+        <li class="collection-article-item">
+          <span class="article-number">2</span>
+          <span>技术选型：GitHub Pages</span>
+        </li>
+        <li class="collection-article-item current">
+          <span class="article-number">3</span>
+          <span>三栏布局文章详情页</span>
+        </li>
+        <li class="collection-article-item">
+          <span class="article-number">4</span>
+          <span>分类页面左右布局设计</span>
+        </li>
+        <li class="collection-article-item">
+          <span class="article-number">5</span>
+          <span>标签和合辑功能实现</span>
+        </li>
+        <li class="collection-article-item">
+          <span class="article-number">6</span>
+          <span>待更新...</span>
+        </li>
+        <li class="collection-article-item">
+          <span class="article-number">7</span>
+          <span>待更新...</span>
+        </li>
+        <li class="collection-article-item">
+          <span class="article-number">8</span>
+          <span>待更新...</span>
         </li>
       </ul>
+    </div>
+    {% endif %}
+    
+    <!-- TA的专栏 -->
+    <div class="column-section" style="margin-top: 20px;">
+      <div class="section-title">📝 TA的专栏</div>
+      <div class="column-list">
+        <div class="column-item">
+          <div class="column-icon" style="background: linear-gradient(135deg, #ff6b6b, #ee5a24);">🔥</div>
+          <div class="column-info">
+            <div class="column-name">博客搭建实操</div>
+            <div class="column-count">8 篇文章</div>
+          </div>
+        </div>
+        <div class="column-item">
+          <div class="column-icon" style="background: linear-gradient(135deg, #f093fb, #f5576c);">💰</div>
+          <div class="column-info">
+            <div class="column-name">程序员搞钱指南</div>
+            <div class="column-count">12 篇文章</div>
+          </div>
+        </div>
+        <div class="column-item">
+          <div class="column-icon" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">🏃</div>
+          <div class="column-info">
+            <div class="column-name">自由职业养成</div>
+            <div class="column-count">5 篇文章</div>
+          </div>
+        </div>
+      </div>
     </div>
   </aside>
 </div>
@@ -356,7 +603,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const tocList = document.getElementById('toc-list');
   
   if (headings.length === 0) {
-    tocList.innerHTML = '<li style="color: #999; font-size: 13px;">暂无目录</li>';
+    tocList.innerHTML = '<li><a style="color: #999;">暂无目录</a></li>';
     return;
   }
   
@@ -367,8 +614,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const li = document.createElement('li');
     const a = document.createElement('a');
     a.href = '#' + id;
-    a.textContent = heading.textContent;
     a.className = 'toc-' + heading.tagName.toLowerCase();
+    a.textContent = heading.textContent;
     
     li.appendChild(a);
     tocList.appendChild(li);
