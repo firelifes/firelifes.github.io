@@ -341,7 +341,11 @@ layout: default
   <aside class="hot-sidebar">
     <h3>🔥 热门文章</h3>
     <ul class="hot-post-list">
-      {% assign category_posts = site.posts | where: "categories", page.category %}
+      {% if page.category == '全部' %}
+        {% assign category_posts = site.posts %}
+      {% else %}
+        {% assign category_posts = site.posts | where: "categories", page.category %}
+      {% endif %}
       {% assign sorted_posts = category_posts | sort: 'views' | reverse %}
       {% for post in sorted_posts limit: 5 %}
       <li class="hot-post-item">
@@ -362,7 +366,11 @@ layout: default
       <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #2a7ae2;">🏷️ 标签</h3>
       <div class="tag-list" style="display: flex; flex-wrap: wrap; gap: 8px;">
         {% assign all_tags = "" | split: "" %}
-        {% assign category_posts = site.posts | where: "categories", page.category %}
+        {% if page.category == '全部' %}
+          {% assign category_posts = site.posts %}
+        {% else %}
+          {% assign category_posts = site.posts | where: "categories", page.category %}
+        {% endif %}
         {% for post in category_posts %}
           {% if post.tags %}
             {% for tag in post.tags %}
@@ -403,10 +411,14 @@ layout: default
 
   <!-- 右侧文章卡片列表 -->
   <main class="posts-main">
-    <h2>📝 {{ page.category }} 文章</h2>
+    <h2>📝 {% if page.category == '全部' %}全部文章{% else %}{{ page.category }} 文章{% endif %}</h2>
     
     <div class="post-cards-grid" id="postsGrid">
-      {% assign category_posts = site.posts | where: "categories", page.category %}
+      {% if page.category == '全部' %}
+        {% assign category_posts = site.posts %}
+      {% else %}
+        {% assign category_posts = site.posts | where: "categories", page.category %}
+      {% endif %}
       {% for post in category_posts %}
       <article class="post-card" data-page="{{ forloop.index | divided_by: 10.0 | ceil }}">
         <a href="{{ post.url }}" class="post-card-link">
