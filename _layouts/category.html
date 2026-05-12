@@ -355,7 +355,6 @@ layout: default
         </div>
         <div class="hot-post-meta">
           <span>📅 {{ post.date | date: "%m-%d" }}</span>
-          <span>👁️ {% if post.views %}{{ post.views }}{% else %}{{ 50 | random | plus: 100 }}{% endif %}</span>
         </div>
       </li>
       {% endfor %}
@@ -448,7 +447,6 @@ layout: default
               <div class="meta-right">
                 <span>👤 {{ site.author.name }}</span>
                 <span>📅 {{ post.date | date: "%Y-%m-%d" }}</span>
-                <span>👁️ {% if post.views %}{{ post.views }}{% else %}{{ 100 | random | plus: 50 }}{% endif %}</span>
               </div>
             </div>
             
