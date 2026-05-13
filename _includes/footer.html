@@ -21,7 +21,14 @@
 <div class="page__footer-copyright">
   &copy; {{ site.time | date: '%Y' }} {{ site.name | default: site.title }}. {{ site.data.ui-text[site.locale].powered_by | default: "Powered by" }} <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.
   <br>
+  <span id="busuanzi_container_site_pv" style="font-size: 0.8rem;">总访问量 <span id="busuanzi_value_site_pv" style="font-weight: 500;">-</span> 次</span>
+  <span style="margin: 0 8px; font-size: 0.8rem;">|</span>
+  <span id="busuanzi_container_site_uv" style="font-size: 0.8rem;">访客数 <span id="busuanzi_value_site_uv" style="font-weight: 500;">-</span> 人</span>
+  <br>
   <span style="font-size: 0.75rem; color: #94a3b8; opacity: 0.9;">
     🚀 最后构建：{{ site.time | date: "%Y-%m-%d %H:%M:%S" }} 北京时间
   </span>
 </div>
+
+<!-- 不蒜子访问统计 -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
