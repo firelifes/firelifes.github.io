@@ -244,15 +244,13 @@
         <a href="{{ link.url }}" target="_blank">{{ link.label }}</a>
         {% endfor %}
       </div>
-      <div style="margin: 8px 0; font-size: 0.85rem;">
+      <div style="font-size: 0.85rem; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; align-items: center;">
+        <span>&copy; {{ site.time | date: '%Y' }} {{ site.title }}. All rights reserved.</span>
+        <span style="font-size: 0.75rem; color: #94a3b8;">🏷️ 版本 v{{ site.time | date: "%Y%m%d%H%M%S" }}</span>
         <span id="busuanzi_container_site_pv">总访问量 <span id="busuanzi_value_site_pv" style="font-weight: 500;">-</span> 次</span>
-        <span style="margin: 0 8px;">|</span>
+        <span>|</span>
         <span id="busuanzi_container_site_uv">访客数 <span id="busuanzi_value_site_uv" style="font-weight: 500;">-</span> 人</span>
       </div>
-      <div style="font-size: 0.7rem; color: #94a3b8;">
-        🏷️ 版本 v{{ site.time | date: "%Y%m%d.%H%M%S" }}
-      </div>
-      <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}. All rights reserved.</p>
     </div>
   </footer>
 
