@@ -483,7 +483,7 @@ layout: default
       {% if page.categories %}
       <span>📁 
         {% for category in page.categories %}
-        <a href="/category/{{ category }}/">{{ category }}</a>
+        <a href="{{ '/category/' | append: category | append: '/' | relative_url }}">{{ category }}</a>
         {% unless forloop.last %}, {% endunless %}
         {% endfor %}
       </span>
