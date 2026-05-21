@@ -388,22 +388,23 @@ layout: default
       </div>
     </div>
     
-    <!-- 合集列表 -->
+    <!-- 合集列表（动态生成，基于分类） -->
     <div class="sidebar-section" style="margin-top: 30px;">
       <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #2a7ae2;">📚 合集</h3>
       <div class="collection-list" style="display: flex; flex-direction: column; gap: 12px;">
-        <div class="collection-item" style="padding: 12px; background: #f5f7fa; border-radius: 8px; cursor: pointer; transition: all 0.2s;">
-          <div class="collection-name" style="font-weight: 600; color: #333; margin-bottom: 6px;">🔥 博客搭建系列</div>
-          <div class="collection-meta" style="font-size: 12px; color: #999;">共 5 篇 · 更新中</div>
+        {% assign categories = site.posts | map: 'categories' | uniq | sort %}
+        {% for category in categories %}
+          {% if category %}
+            {% assign category_posts = site.posts | where: "categories", category %}
+            {% assign post_count = category_posts | size %}
+            {% if post_count > 0 %}
+        <div class="collection-item" onclick="window.location.href='{{ '/category/' | append: category | append: '/' | relative_url }}'" style="padding: 12px; background: #f5f7fa; border-radius: 8px; cursor: pointer; transition: all 0.2s;">
+          <div class="collection-name" style="font-weight: 600; color: #333; margin-bottom: 6px;">{{ category }}</div>
+          <div class="collection-meta" style="font-size: 12px; color: #999;">共 {{ post_count }} 篇</div>
         </div>
-        <div class="collection-item" style="padding: 12px; background: #f5f7fa; border-radius: 8px; cursor: pointer; transition: all 0.2s;">
-          <div class="collection-name" style="font-weight: 600; color: #333; margin-bottom: 6px;">💰 财务自由之路</div>
-          <div class="collection-meta" style="font-size: 12px; color: #999;">共 8 篇 · 已完结</div>
-        </div>
-        <div class="collection-item" style="padding: 12px; background: #f5f7fa; border-radius: 8px; cursor: pointer; transition: all 0.2s;">
-          <div class="collection-name" style="font-weight: 600; color: #333; margin-bottom: 6px;">💻 程序员副业指南</div>
-          <div class="collection-meta" style="font-size: 12px; color: #999;">共 3 篇 · 连载中</div>
-        </div>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
       </div>
     </div>
   </aside>

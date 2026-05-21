@@ -503,51 +503,25 @@ layout: default
 
   <!-- 右侧边栏 - 合集目录 -->
   <aside class="info-sidebar">
-    <!-- 合集文章列表 -->
-    <div class="collection-articles">
-      <div class="section-title" style="display: flex; justify-content: space-between; align-items: center;">
-        <span>📖 合集目录</span>
-        <div class="pagination-controls" style="display: flex; gap: 6px;">
-          <button class="page-btn" onclick="prevPage()" id="prevPageBtn" style="padding: 2px 8px; border: 1px solid #ddd; background: white; border-radius: 4px; cursor: pointer; font-size: 12px;">‹</button>
-          <span id="currentPageInfo" style="font-size: 12px; color: #999;">1/2</span>
-          <button class="page-btn" onclick="nextPage()" id="nextPageBtn" style="padding: 2px 8px; border: 1px solid #ddd; background: white; border-radius: 4px; cursor: pointer; font-size: 12px;">›</button>
+    <!-- 合集文章列表（动态生成） -->
+    {% assign current_category = page.categories | first %}
+    {% if current_category %}
+      {% assign category_posts = site.posts | where: "categories", current_category | sort: 'date' %}
+      <div class="collection-articles">
+        <div class="section-title">
+          <span>📖 {{ current_category }}合集</span>
+          <span style="font-size: 12px; color: #999; font-weight: normal;">共 {{ category_posts | size }} 篇</span>
         </div>
+        <ul class="collection-article-list" id="collectionList">
+          {% for post in category_posts %}
+          <li class="collection-article-item{% if page.url == post.url %} current{% endif %}" onclick="window.location.href='{{ post.url | relative_url }}'">
+            <span class="article-number">{{ forloop.index }}</span>
+            <span>{{ post.title }}</span>
+          </li>
+          {% endfor %}
+        </ul>
       </div>
-      <ul class="collection-article-list" id="collectionList">
-        <li class="collection-article-item" data-page="1" onclick="window.location.href='/category/随笔/2026/05/11/为什么会有这个博客.html'">
-          <span class="article-number">1</span>
-          <span>为什么会有这个博客？</span>
-        </li>
-        <li class="collection-article-item" data-page="1" onclick="window.location.href='/category/随笔/2026/05/11/技术选型.html'">
-          <span class="article-number">2</span>
-          <span>技术选型：GitHub Pages</span>
-        </li>
-        <li class="collection-article-item current" data-page="1" onclick="window.location.href='/category/随笔/2026/05/11/三栏布局演示文章.html'">
-          <span class="article-number">3</span>
-          <span>三栏布局文章详情页</span>
-        </li>
-        <li class="collection-article-item" data-page="1" onclick="window.location.href='/category/随笔/2026/05/11/分类页面布局.html'">
-          <span class="article-number">4</span>
-          <span>分类页面左右布局设计</span>
-        </li>
-        <li class="collection-article-item" data-page="1" onclick="window.location.href='/category/随笔/2026/05/11/标签和合辑功能.html'">
-          <span class="article-number">5</span>
-          <span>标签和合辑功能实现</span>
-        </li>
-        <li class="collection-article-item" data-page="2" onclick="window.location.href='/category/随笔/2026/05/11/SEO优化实战.html'">
-          <span class="article-number">6</span>
-          <span>SEO优化实战</span>
-        </li>
-        <li class="collection-article-item" data-page="2" onclick="window.location.href='/category/随笔/2026/05/11/评论系统接入.html'">
-          <span class="article-number">7</span>
-          <span>评论系统接入</span>
-        </li>
-        <li class="collection-article-item" data-page="2" onclick="window.location.href='/category/随笔/2026/05/11/博客性能优化.html'">
-          <span class="article-number">8</span>
-          <span>博客性能优化</span>
-        </li>
-      </ul>
-    </div>
+    {% endif %}
   </aside>
 </div>
 
