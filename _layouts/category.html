@@ -388,18 +388,18 @@ layout: default
       </div>
     </div>
     
-    <!-- 合集列表（动态生成，基于 collection 字段） -->
+    <!-- 合集列表（动态生成，基于 series 字段） -->
     <div class="sidebar-section" style="margin-top: 30px;">
       <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #2a7ae2;">📚 合集</h3>
       <div class="collection-list" style="display: flex; flex-direction: column; gap: 12px;">
-        {% assign collections = site.posts | map: 'collection' | uniq | sort %}
-        {% for col in collections %}
-          {% if col %}
-            {% assign collection_posts = site.posts | where: "collection", col %}
-            {% assign post_count = collection_posts | size %}
+        {% assign all_series = site.posts | map: 'series' | uniq | sort %}
+        {% for series in all_series %}
+          {% if series %}
+            {% assign series_posts = site.posts | where: "series", series %}
+            {% assign post_count = series_posts | size %}
             {% if post_count > 0 %}
-        <div class="collection-item" onclick="window.location.href='{{ '/categories/' | relative_url }}?collection={{ col | url_encode }}'" style="padding: 12px; background: #f5f7fa; border-radius: 8px; cursor: pointer; transition: all 0.2s;">
-          <div class="collection-name" style="font-weight: 600; color: #333; margin-bottom: 6px;">{{ col }}</div>
+        <div class="collection-item" onclick="window.location.href='{{ '/categories/' | relative_url }}?series={{ series | url_encode }}'" style="padding: 12px; background: #f5f7fa; border-radius: 8px; cursor: pointer; transition: all 0.2s;">
+          <div class="collection-name" style="font-weight: 600; color: #333; margin-bottom: 6px;">{{ series }}</div>
           <div class="collection-meta" style="font-size: 12px; color: #999;">共 {{ post_count }} 篇</div>
         </div>
             {% endif %}
@@ -420,7 +420,7 @@ layout: default
         {% assign category_posts = site.posts | where: "categories", page.category %}
       {% endif %}
       {% for post in category_posts %}
-      <article class="post-card" data-page="{{ forloop.index | divided_by: 10.0 | ceil }}" {% if post.collection %}data-collection="{{ post.collection }}"{% endif %}>
+      <article class="post-card" data-page="{{ forloop.index | divided_by: 10.0 | ceil }}" {% if post.series %}data-series="{{ post.series }}"{% endif %}>
         <a href="{{ post.url }}" class="post-card-link">
           <!-- 左侧：图片 -->
           <div class="post-card-image">
@@ -479,17 +479,17 @@ let currentPage = 1;
 let totalPosts = 0;
 let totalPages = 1;
 let filteredCards = [];
-let currentCollection = null;
+let currentSeries = null;
 
 document.addEventListener('DOMContentLoaded', function() {
-  // 检查 URL 参数中的 collection
+  // 检查 URL 参数中的 series
   const urlParams = new URLSearchParams(window.location.search);
-  currentCollection = urlParams.get('collection');
+  currentSeries = urlParams.get('series');
   
-  // 如果有 collection 参数，筛选并更新标题
-  if (currentCollection) {
-    document.getElementById('pageTitle').textContent = `📚 ${decodeURIComponent(currentCollection)}`;
-    filterByCollection(currentCollection);
+  // 如果有 series 参数，筛选并更新标题
+  if (currentSeries) {
+    document.getElementById('pageTitle').textContent = `📚 ${decodeURIComponent(currentSeries)}`;
+    filterBySeries(currentSeries);
   } else {
     filteredCards = Array.from(document.querySelectorAll('.post-card'));
   }
@@ -499,13 +499,13 @@ document.addEventListener('DOMContentLoaded', function() {
   updatePageDisplay();
 });
 
-function filterByCollection(collectionName) {
+function filterBySeries(seriesName) {
   const allCards = document.querySelectorAll('.post-card');
   filteredCards = [];
   
   allCards.forEach(card => {
-    const cardCollection = card.getAttribute('data-collection');
-    if (cardCollection === collectionName) {
+    const cardSeries = card.getAttribute('data-series');
+    if (cardSeries === seriesName) {
       filteredCards.push(card);
     }
   });
