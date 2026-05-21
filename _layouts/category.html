@@ -392,18 +392,22 @@ layout: default
     <div class="sidebar-section" style="margin-top: 30px;">
       <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #2a7ae2;">📚 合集</h3>
       <div class="collection-list" style="display: flex; flex-direction: column; gap: 12px;">
-        {% assign all_series = site.posts | map: 'series' | uniq | sort %}
-        {% for series in all_series %}
-          {% if series %}
-            {% assign series_posts = site.posts | where: "series", series %}
-            {% assign post_count = series_posts | size %}
-            {% if post_count > 0 %}
+        {% assign collected_series = "" | split: "" %}
+        {% for post in site.posts %}
+          {% if post.series %}
+            {% unless collected_series contains post.series %}
+              {% assign collected_series = collected_series | push: post.series %}
+            {% endunless %}
+          {% endif %}
+        {% endfor %}
+        {% assign sorted_series = collected_series | sort %}
+        {% for series in sorted_series %}
+          {% assign series_posts = site.posts | where: "series", series %}
+          {% assign post_count = series_posts | size %}
         <div class="collection-item" onclick="window.location.href='{{ '/categories/' | relative_url }}?series={{ series | url_encode }}'" style="padding: 12px; background: #f5f7fa; border-radius: 8px; cursor: pointer; transition: all 0.2s;">
           <div class="collection-name" style="font-weight: 600; color: #333; margin-bottom: 6px;">{{ series }}</div>
           <div class="collection-meta" style="font-size: 12px; color: #999;">共 {{ post_count }} 篇</div>
         </div>
-            {% endif %}
-          {% endif %}
         {% endfor %}
       </div>
     </div>
