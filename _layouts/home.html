@@ -177,19 +177,19 @@ layout: default
     {% assign knowledge_count = site.posts | where: "categories", "知识" | size %}
     {% assign essay_count = site.posts | where: "categories", "随笔" | size %}
     
-    <a href="/category/%E9%A1%B9%E7%9B%AE/" class="category-card project">
+    <a href="{{ '/category/项目/' | relative_url }}" class="category-card project">
       <div class="category-icon">🚀</div>
       <div class="category-name">项目</div>
       <div class="category-count">{{ project_count }} 篇文章</div>
     </a>
     
-    <a href="/category/%E7%9F%A5%E8%AF%86/" class="category-card knowledge">
+    <a href="{{ '/category/知识/' | relative_url }}" class="category-card knowledge">
       <div class="category-icon">📚</div>
       <div class="category-name">知识</div>
       <div class="category-count">{{ knowledge_count }} 篇文章</div>
     </a>
     
-    <a href="/category/%E9%9A%8F%E7%AC%94/" class="category-card essay">
+    <a href="{{ '/category/随笔/' | relative_url }}" class="category-card essay">
       <div class="category-icon">✍️</div>
       <div class="category-name">随笔</div>
       <div class="category-count">{{ essay_count }} 篇文章</div>
